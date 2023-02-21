@@ -40,12 +40,6 @@
 
                                 <c:otherwise>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/board/writeForm">글쓰기</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/user/updateForm">회원정보</a>
-                                    </li>
-                                    <li class="nav-item">
                                         <a class="nav-link" href="/logout">로그아웃</a>
                                     </li>
                                 </c:otherwise>
@@ -53,9 +47,7 @@
 
                         </ul>
                         <div>
-                            <a href="/user/profileUpdateForm"><img
-                                    src="${principal.profile == null ? '/images/profile.jfif' : principal.profile}"
-                                    style="width: 35px;" class="rounded-circle" alt="Cinque Terre"></a>
+                            <img src="/images/profile.jfif" style="width: 35px;" class="rounded-circle" alt="Cinque Terre">
                         </div>
                     </div>
 
