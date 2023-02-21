@@ -14,7 +14,7 @@ public class ShaTest {
     public void sha_test() {
         String passwordSha = "";
         try {
-            String salt = ShaTest.makeSalt();
+            String salt = "SmGXj3iJfUY3TjqFms+5/g==";
             passwordSha = ShaTest.encode("1234"+salt);
         } catch (Exception e) {
             
