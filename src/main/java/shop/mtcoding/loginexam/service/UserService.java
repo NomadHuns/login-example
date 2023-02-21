@@ -14,6 +14,7 @@ import shop.mtcoding.loginexam.util.Hash;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class UserService {
     private final UserRepository userRepository;
 
