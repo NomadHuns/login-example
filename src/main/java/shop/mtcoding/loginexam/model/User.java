@@ -13,6 +13,7 @@ public class User {
     private Integer id;
     private String username;
     private String password;
+    private String salt;
     private String email;
     private Timestamp createdAt;
 
@@ -26,6 +27,13 @@ public class User {
     public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
+        this.email = email;
+    }
+
+    public User(String username, String password, String salt, String email) {
+        this.username = username;
+        this.password = password;
+        this.salt = salt;
         this.email = email;
     }
 

@@ -49,7 +49,7 @@ public class UserController {
         verifyString(loginReqDto.getPassword(), "패스워드를 입력하세요.");
         User userPS = userService.login(loginReqDto);
         session.setAttribute("principal", userPS);
-        return "redirect:/loginForm";
+        return "redirect:/";
     }
 
     @GetMapping("/logout")

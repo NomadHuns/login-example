@@ -3,6 +3,8 @@ package shop.mtcoding.loginexam.util;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Base64;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,9 +14,10 @@ public class ShaTest {
     public void sha_test() {
         String passwordSha = "";
         try {
-            passwordSha = ShaTest.encode("1234");
+            String salt = "SmGXj3iJfUY3TjqFms+5/g==";
+            passwordSha = ShaTest.encode("1234"+salt);
         } catch (Exception e) {
-            // TODO: handle exception
+            
         }
         System.out.println("테스트 : " + passwordSha);
     }
@@ -30,5 +33,14 @@ public class ShaTest {
                 hexString.append(hex);
             }
             return hexString.toString();
+    }
+
+    public static String makeSalt() throws NoSuchAlgorithmException {
+        SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
+        byte[] bytes = new byte[16];
+        random.nextBytes(bytes);
+        String salt = new String(Base64.getEncoder().encode(bytes));
+        return salt;
+        
     }
 }

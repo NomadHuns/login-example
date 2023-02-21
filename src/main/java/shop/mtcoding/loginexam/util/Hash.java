@@ -3,6 +3,8 @@ package shop.mtcoding.loginexam.util;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Base64;
 
 public class Hash {
     public static String encode(String password) throws NoSuchAlgorithmException {
@@ -16,5 +18,13 @@ public class Hash {
             hexString.append(hex);
         }
         return hexString.toString();
+    }
+
+    public static String makeSalt() throws NoSuchAlgorithmException {
+        SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
+        byte[] bytes = new byte[16];
+        random.nextBytes(bytes);
+        String salt = new String(Base64.getEncoder().encode(bytes));
+        return salt;
     }
 }

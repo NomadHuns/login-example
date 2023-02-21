@@ -11,13 +11,13 @@
       select * from user_tb where id = #{id}
    </select>
    <insert id="insert">
-      insert into user_tb(username, password, email, created_at) values(#{username}, #{password}, #{email}, now())
+      insert into user_tb(username, password, salt, email, created_at) values(#{username}, #{password}, #{salt}, #{email}, now())
    </insert>
    <delete id="deleteById">
       delete from user_tb where id = #{id}
    </delete>   
    <update id="updateById">
-      update user_tb set username = #{username}, password = #{password}, email = #{email}, profile = #{profile}, created_at = #{createdAt} where id = #{id}
+      update user_tb set username = #{username}, password = #{password}, email = #{email}, created_at = #{createdAt} where id = #{id}
    </update>
    <select id="findByUsernameAndPassword" resultType="shop.mtcoding.loginexam.model.User">
       select * from user_tb where username = #{username} and password = #{password}
