@@ -18,4 +18,6 @@ public interface UserRepository {
     public int updateById(User user);
 
     public User findByUsernameAndPassword(User user);
+
+    public User findByUsername(String username);
 }
