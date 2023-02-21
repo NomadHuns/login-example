@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import shop.mtcoding.loginexam.dto.UserReq.JoinReqDto;
+import shop.mtcoding.loginexam.dto.UserReq.LoginReqDto;
 import shop.mtcoding.loginexam.ex.CustomException;
 import shop.mtcoding.loginexam.model.User;
 import shop.mtcoding.loginexam.model.UserRepository;
@@ -18,8 +19,8 @@ public class UserService {
 
     @Transactional
     public void join(JoinReqDto joinReqDto) {
-        User principal = userRepository.findByUsername(joinReqDto.getUsername());
-        if (principal != null) {
+        User userPS = userRepository.findByUsername(joinReqDto.getUsername());
+        if (userPS != null) {
             throw new CustomException("동일한 유저네임이 존재합니다.");
         }
         try {
@@ -27,5 +28,19 @@ public class UserService {
         } catch (Exception e) {
             throw new CustomException("회원가입 실패", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    public User login(LoginReqDto loginReqDto) {
+        User userPS = null;
+        try {
+            userPS = userRepository.findByUsernameAndPassword(new User(loginReqDto.getUsername(), 
+                    Hash.encode(loginReqDto.getPassword())));
+        } catch (Exception e) {
+            throw new CustomException("로그인 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        if (userPS == null) {
+            throw new CustomException("유저네임이나 패스워드를 확인하세요");
+        }
+        return userPS;
     }
 }
